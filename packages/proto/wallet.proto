@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package wallet;
+
+service WalletService {
+  rpc CreateWallet (CreateWalletRequest) returns (Wallet) {}
+  rpc GetWallet (GetWalletRequest) returns (Wallet) {}
+  rpc CreditWallet (CreditWalletRequest) returns (WalletTransactionResponse) {}
+  rpc DebitWallet (DebitWalletRequest) returns (WalletTransactionResponse) {}
+  rpc DeleteWallet (DeleteWalletRequest) returns (DeleteWalletResponse) {}
+  rpc CreateUserWithWallet (CreateUserWithWalletRequest) returns (CreateUserWithWalletResponse) {}
+}
+
+
+message CreateWalletRequest {
+  string userId = 1;
+}
+
+message GetWalletRequest {
+  string userId = 1;
+}
+
+message CreditWalletRequest {
+  string userId = 1;
+  int32 amount = 2;
+}
+
+message DebitWalletRequest {
+  string userId = 1;
+  int32 amount = 2;
+}
+
+message DeleteWalletRequest {
+  string userId = 1;
+}
+
+message CreateUserWithWalletRequest {
+  string email = 1;
+  string name = 2;
+}
+
+// ── Response messages ───────────────────────────────────────────────────────
+
+message Wallet {
+  string id = 1;
+  string userId = 2;
+  int64 balance = 3;
+  string balanceFormatted = 4;
+  string currency = 5;
+  string createdAt = 6;
+}
+
+message Transaction {
+  string id = 1;
+  string walletId = 2;
+  string reference = 3;
+  string type = 4;
+  int64 amount = 5;
+  string amountFormatted = 6;
+  int64 balanceAfter = 7;
+  optional string description = 8;
+  optional string counterpartyAccount = 9;
+  string createdAt = 10;
+}
+
+message WalletTransactionResponse {
+  Wallet wallet = 1;
+  Transaction transaction = 2;
+}
+
+message DeleteWalletResponse {
+  bool success = 1;
+}
+
+message UserResponse {
+  string id = 1;
+  string email = 2;
+  string name = 3;
+  string createdAt = 4;
+}
+
+message CreateUserWithWalletResponse {
+  UserResponse user = 1;
+  Wallet wallet = 2;
+}

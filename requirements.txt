@@ -1,0 +1,163 @@
+Backend Engineer Technical Assessment 
+Overview
+This assessment evaluates your ability to design and implement backend services using NestJS, microservices, Prisma ORM, PostgreSQL, and gRPC communication in a monorepo architecture.
+The goal is to assess your ability to build scalable, maintainable backend systems.
+Estimated Time: 3–5 hours
+Submission: GitHub Repository
+
+Task: Build a Microservice-Based Wallet System
+You will build two backend microservices that communicate via gRPC.
+Services
+User Service
+Wallet Service
+Services should be structured in a monorepo.
+Example structure:
+backend-assessment/
+ ├── apps/
+ │   ├── user-service/
+ │   └── wallet-service/
+ │
+ ├── packages/
+ │   ├── proto/
+ │   └── prisma/
+ │
+ └── README.md
+
+
+Requirements
+1️⃣ User Service
+Build a NestJS service that manages users.
+Features
+Create a user.
+Fields:
+id
+email
+name
+createdAt
+
+gRPC Endpoint
+CreateUser
+GetUserById
+
+
+2️⃣ Wallet Service
+This service manages wallet balances.
+Features
+Each user should automatically have a wallet.
+Fields:
+id
+userId
+balance
+createdAt
+
+gRPC Endpoints
+CreateWallet
+GetWallet
+CreditWallet
+DebitWallet
+
+
+3️⃣ Inter-Service Communication
+Use gRPC communication.
+Example:
+Wallet service should verify that a user exists before creating a wallet by calling:
+UserService.GetUserById
+
+
+4️⃣ Database
+Use PostgreSQL + Prisma ORM
+Create schemas for:
+User
+id
+email
+name
+createdAt
+
+Wallet
+id
+userId
+balance
+createdAt
+
+
+5️⃣ Prisma Setup
+Use Prisma migrations.
+Expected commands:
+npx prisma migrate dev
+npx prisma generate
+
+
+6️⃣ GitHub
+Push the project to GitHub.
+Commit history should reflect development progress.
+
+7️⃣ API Testing
+Provide Postman collection or curl examples showing:
+Create user
+Create wallet
+Credit wallet
+Debit wallet
+Get wallet
+
+
+Bonus Points (Optional)
+Implement any of the following:
+1️⃣ Transactions
+Use Prisma transaction when debiting wallet.
+Example:
+$transaction
+
+
+2️⃣ Validation
+Use:
+class-validator
+
+
+3️⃣ Error Handling
+Examples:
+User not found
+Insufficient balance
+
+
+
+
+4️⃣ Logging
+Implement structured logging.
+Example:
+nestjs-pino
+
+
+Evaluation Criteria
+Category
+What We Look For
+Architecture
+Proper microservice separation
+Code Quality
+Clean NestJS patterns
+Database Design
+Correct Prisma schema
+gRPC Communication
+Proper proto design
+Error Handling
+Robust edge case handling
+Git Practices
+Meaningful commits
+Documentation
+Clear README
+
+
+Deliverables
+Submit a GitHub repository containing:
+Source code
+README
+Prisma schema
+Proto files
+Example requests
+
+
+README Should Include
+Project setup instructions
+How to run services
+How to run migrations
+Example requests
+

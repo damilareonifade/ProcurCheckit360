@@ -1,0 +1,17 @@
+# Catch-all for any service not covered by a nested .gitignore
+node_modules/
+dist/
+build/
+generated/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
